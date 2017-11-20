@@ -32,12 +32,13 @@ public class MainActivity extends AppCompatActivity implements MyNotesRecyclerVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
         View mCustomView = mInflater.inflate(R.layout.search_bar, null);
         actionBar.setCustomView(mCustomView);
@@ -98,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements MyNotesRecyclerVi
         Realm.init(getApplicationContext());
         this.recyclerView = (RecyclerView) findViewById(R.id.list);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.adapter = new MyNotesRecyclerViewAdapter(RealmDB.getAllNotes(), this);
-        this.recyclerView.setAdapter(adapter);
+
+
     }
         @Override
         public void OnClick(View view, Note note) {
@@ -126,6 +127,13 @@ public class MainActivity extends AppCompatActivity implements MyNotesRecyclerVi
             builder.create();
             builder.show();
         }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.adapter = new MyNotesRecyclerViewAdapter(RealmDB.getAllNotes(), this);
+        this.recyclerView.setAdapter(adapter);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

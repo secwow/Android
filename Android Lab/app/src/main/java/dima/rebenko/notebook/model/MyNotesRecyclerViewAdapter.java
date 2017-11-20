@@ -40,28 +40,24 @@ public class MyNotesRecyclerViewAdapter extends RecyclerView.Adapter<MyNotesRecy
 
     @Override
     public NoteItem onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        if(parent.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.note_item, parent, false);
-        } else {
-            view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.note_item_landscape, parent, false);
-        }
 
         return new NoteItem(view, listener);
     }
 
     @Override
     public void onBindViewHolder(final NoteItem holder, int position) {
+
         holder.mItem = mValues.get(position);
-        if (!"".equals(holder.mItem.getPathToImage().toString())) {
+        if (!"".equals(holder.mItem.getPathToImage())) {
             Bitmap mainImage = BitmapFactory.decodeFile(holder.mItem.getPathToImage());
-            if (mainImage != null ) {
+            if (mainImage != null) {
                 holder.imageIcon.setImageBitmap(mainImage);
             }
         }
         int newColor;
+
         switch (holder.mItem.getImportance()){
             case NO_MATTER:
                 holder.importantIcon.setImageResource(android.R.drawable.ic_dialog_alert);
