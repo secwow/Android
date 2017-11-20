@@ -1,0 +1,59 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RGB">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:id="@+id/colored_view"
+            android:layout_weight="0.33" >
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.66"
+            android:gravity="right"
+            android:layout_gravity="right|center_vertical"
+            android:baselineAligned="false">
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/red_seekbar"
+                android:max="255"
+                android:progress="1"
+                android:layout_weight="0.33" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/green_seekbar"
+                android:max="255"
+                android:progress="1"
+                android:layout_weight="0.33" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/blue_seekbar"
+                android:max="255"
+                android:progress="1"
+                android:layout_weight="0.33" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
