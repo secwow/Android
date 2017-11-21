@@ -1,4 +1,4 @@
-package dima.rebenko.notebook.model;
+package dima.rebenko.notebook.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -23,10 +23,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import dima.rebenko.notebook.Helpers.CustomTextView;
+import dima.rebenko.notebook.Helpers.Util;
 import dima.rebenko.notebook.R;
+import dima.rebenko.notebook.model.Note;
+import dima.rebenko.notebook.Helpers.RealmDB;
 
 
-public class EditAddActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class EditAddActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     TextView nameView, descriptionView, dateView, timeView;
     SeekBar impotance;
@@ -72,10 +76,11 @@ public class EditAddActivity extends AppCompatActivity implements TimePickerDial
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_add);
-        this.nameView = (TextView) findViewById(R.id.name);
-        this.dateView = (TextView) findViewById(R.id.date);
-        this.timeView = (TextView) findViewById(R.id.time);
+        this.nameView = CustomTextView.setupTextView((TextView)findViewById(R.id.name));
+        this.dateView = CustomTextView.setupTextView((TextView) findViewById(R.id.date));
+        this.timeView = CustomTextView.setupTextView((TextView) findViewById(R.id.time));
         this.descriptionView = (TextView) findViewById(R.id.description);
         this.impotance = (SeekBar) findViewById(R.id.importance);
         this.submitButton = (Button) findViewById(R.id.submit);
@@ -103,7 +108,7 @@ public class EditAddActivity extends AppCompatActivity implements TimePickerDial
         } else {
             note.setupId();
             mode = Mode.ADD;
-            this.submitButton.setText(getApplicationContext().getResources().getText(R.string.add_button_text));
+            this.submitButton.setText(getApplicationContext().getResources().getText(R.string.add_note));
         }
 
         this.impotance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -141,7 +146,7 @@ public class EditAddActivity extends AppCompatActivity implements TimePickerDial
                 .single()
                 .imageDirectory("Camera")
                 .start(REQUEST_CODE_PICKER));
-        if(!"".equals(note.getPathToImage().toString())) {
+        if(!"".equals(note.getPathToImage())) {
             Bitmap mainImage = BitmapFactory.decodeFile(this.note.getPathToImage());
             if (mainImage!=null) {
                 EditAddActivity.this.imagePicker.setImageBitmap(mainImage);

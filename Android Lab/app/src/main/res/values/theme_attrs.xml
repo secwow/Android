@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="text_regular" format="reference" />
+    <attr name="text_title" format="reference" />
+    <attr name="button_style" format="reference" />
+    <attr name="action_bar_style" format="reference" />
+</resources>

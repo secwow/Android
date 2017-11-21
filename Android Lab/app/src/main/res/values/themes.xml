@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.GreenTheme" parent="Theme.AppCompat.Light">
+        <item name="text_regular">@style/text_regular_style_green</item>
+        <item name="text_title">@style/text_title_style_green</item>
+        <item name="button_style">@style/button_style_green</item>
+        <item name="actionBarStyle">@style/action_bar_style_green</item>
+    </style>
+
+    <style name="Theme.PurpleTheme" parent="Theme.AppCompat.Light">
+        <item name="text_regular">@style/text_regular_style_purple</item>
+        <item name="text_title">@style/text_title_style_purple</item>
+        <item name="button_style">@style/button_style_purple</item>
+        <item name="actionBarStyle">@style/action_bar_style_purple</item>
+    </style>
+
+</resources>

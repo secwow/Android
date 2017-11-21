@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
+        android:hint="@string/search_hint"
         android:id="@+id/searchField"
         android:layout_weight="1" />
 

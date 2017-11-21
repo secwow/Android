@@ -25,7 +25,8 @@
                 android:id="@+id/calculation_result_view"
                 android:layout_weight="0.56"
                 android:enabled="true"
-                android:editable="false" />
+                android:editable="false"
+                style="?text_regular"/>
         </LinearLayout>
 
         <LinearLayout

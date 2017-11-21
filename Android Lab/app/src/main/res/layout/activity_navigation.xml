@@ -10,9 +10,9 @@
     tools:context="dima.rebenko.notebook.Navigation">
 
     <ImageButton
+        android:id="@+id/first_task"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:id="@+id/first_task"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -29,4 +29,44 @@
         android:id="@+id/second_task"
         android:layout_below="@+id/first_task"
         android:layout_alignStart="@+id/first_task" />
+
+    <Spinner
+        android:id="@+id/theme_changer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/third_task"
+        android:layout_marginEnd="18dp"
+        android:entries="@array/theme_array"/>
+
+    <EditText
+        android:id="@+id/fontSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/theme_changer"
+        android:layout_marginTop="69dp"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textViewSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/theme_changer"
+        android:layout_marginTop="46dp"
+        android:text="TextSize"
+        tools:text="@string/textSize"
+        style="?text_regular"/>
+
+    <Button
+        android:id="@+id/changeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fontSize"
+        android:text="@string/change_text_size_button"
+        style="?button_style"/>
 </RelativeLayout>

@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="dima.rebenko.notebook.model.EditAddActivity"
+    tools:context="dima.rebenko.notebook.activity.EditAddActivity"
     tools:showIn="@layout/activity_edit_add">
 
     <LinearLayout
@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/importance"
+                style="?text_regular"
                 android:id="@+id/textView" />
 
             <SeekBar
@@ -111,6 +112,7 @@
             android:layout_height="wrap_content"
             android:text="New Button"
             android:id="@+id/submit"
+            style="?button_style"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>

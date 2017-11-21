@@ -1,7 +1,6 @@
-package dima.rebenko.notebook.model;
+package dima.rebenko.notebook.adapters;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
@@ -19,7 +18,9 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import dima.rebenko.notebook.Helpers.CustomTextView;
 import dima.rebenko.notebook.R;
+import dima.rebenko.notebook.model.Note;
 
 public class MyNotesRecyclerViewAdapter extends RecyclerView.Adapter<MyNotesRecyclerViewAdapter.NoteItem>{
 
@@ -40,28 +41,24 @@ public class MyNotesRecyclerViewAdapter extends RecyclerView.Adapter<MyNotesRecy
 
     @Override
     public NoteItem onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        if(parent.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.note_item, parent, false);
-        } else {
-            view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.note_item_landscape, parent, false);
-        }
 
         return new NoteItem(view, listener);
     }
 
     @Override
     public void onBindViewHolder(final NoteItem holder, int position) {
+
         holder.mItem = mValues.get(position);
-        if (!"".equals(holder.mItem.getPathToImage().toString())) {
+        if (!"".equals(holder.mItem.getPathToImage())) {
             Bitmap mainImage = BitmapFactory.decodeFile(holder.mItem.getPathToImage());
-            if (mainImage != null ) {
+            if (mainImage != null) {
                 holder.imageIcon.setImageBitmap(mainImage);
             }
         }
         int newColor;
+
         switch (holder.mItem.getImportance()){
             case NO_MATTER:
                 holder.importantIcon.setImageResource(android.R.drawable.ic_dialog_alert);
@@ -108,7 +105,7 @@ public class MyNotesRecyclerViewAdapter extends RecyclerView.Adapter<MyNotesRecy
         public NoteItem(View view, onRecyclerViewClickListener listener) {
             super(view);
             viewHolder = view;
-            date = (TextView) view.findViewById(R.id.date);
+            date = CustomTextView.setupTextView((TextView) view.findViewById(R.id.date));
             imageIcon = (ImageView) view.findViewById(R.id.imageIcon);
             importantIcon = (ImageView) view.findViewById(R.id.importantIcon);
             view.setOnClickListener(view1 -> listener.OnClick(view1, mItem));

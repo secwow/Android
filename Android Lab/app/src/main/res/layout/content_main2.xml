@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="dima.rebenko.notebook.MainActivity"
+    tools:context="dima.rebenko.notebook.activity.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,6 +20,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".MainActivity" />
+        tools:context=".activity.MainActivity" />
 
 </RelativeLayout>

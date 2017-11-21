@@ -10,12 +10,22 @@
 
     <string name="filter_button_text">Filter</string>
     <string name="add_button_text">+</string>
-    <string name="edit_note">Edit</string>
+    <string name="edit_note">Edit note</string>
+    <string name="add_note">Add note</string>
+    <string name="search_hint">Search by description</string>
     <string name="delete_note">Delete</string>
     <string name="name">Name</string>
+    <string name="textSize">Text Size</string>
+    <string name="change_text_size_button">Change text size</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="importance">Importance</string>
     <string name="description">Description</string>
     <string name="choose_image">Choose image</string>
+
+    <string-array name="theme_array">
+        <item>GREEN</item>
+        <item>PURPLE</item>
+    </string-array>
+
 </resources>

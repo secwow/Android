@@ -1,4 +1,4 @@
-package dima.rebenko.notebook;
+package dima.rebenko.notebook.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,18 +13,20 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import dima.rebenko.notebook.model.EditAddActivity;
-import dima.rebenko.notebook.model.MyNotesRecyclerViewAdapter;
+
+import dima.rebenko.notebook.Helpers.Util;
+import dima.rebenko.notebook.R;
+import dima.rebenko.notebook.adapters.MyNotesRecyclerViewAdapter;
 import dima.rebenko.notebook.model.Note;
-import dima.rebenko.notebook.model.RealmDB;
+import dima.rebenko.notebook.Helpers.RealmDB;
 import io.realm.Realm;
 
 
-public class MainActivity extends AppCompatActivity implements MyNotesRecyclerViewAdapter.onRecyclerViewClickListener  {
+public class MainActivity extends BaseActivity implements MyNotesRecyclerViewAdapter.onRecyclerViewClickListener  {
 
     MyNotesRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
@@ -32,15 +34,47 @@ public class MainActivity extends AppCompatActivity implements MyNotesRecyclerVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
+        setContentView(R.layout.activity_main);
+
+        this.recyclerView = (RecyclerView) findViewById(R.id.list);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+        @Override
+        public void OnClick(View view, Note note) {
+
+        }
+
+        @Override
+        public void onLongClick(View view, Note note) {
+            final String[] mCatsName ={"Edit", "Delete"};
+            AlertDialog.Builder builder =  new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Choose action");
+            builder.setItems(mCatsName, (dialog, item) -> {
+                if (item==1){
+                    RealmDB.deleteItem(note);
+                    adapter.updateData(RealmDB.getAllNotes());
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Intent edit = new Intent(getApplicationContext(), EditAddActivity.class);
+                    edit.putExtra("isEdit", true);
+                    edit.putExtra("id", note.getId());
+                    startActivityForResult(edit, EditAddActivity.EDIT);
+                }
+            });
+            builder.create();
+            builder.show();
+        }
+
+
+    private void setupActionBar()
+    {
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
+
         View mCustomView = mInflater.inflate(R.layout.search_bar, null);
-        actionBar.setCustomView(mCustomView);
+        actionBar.setCustomView(mCustomView, new Toolbar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         actionBar.setDisplayShowCustomEnabled(true);
         Button add = (Button)actionBar.getCustomView().findViewById(R.id.add_button);
 
@@ -95,37 +129,14 @@ public class MainActivity extends AppCompatActivity implements MyNotesRecyclerVi
                 builder.show();
             }
         });
-        Realm.init(getApplicationContext());
-        this.recyclerView = (RecyclerView) findViewById(R.id.list);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.setupActionBar();
         this.adapter = new MyNotesRecyclerViewAdapter(RealmDB.getAllNotes(), this);
         this.recyclerView.setAdapter(adapter);
     }
-        @Override
-        public void OnClick(View view, Note note) {
-
-        }
-
-        @Override
-        public void onLongClick(View view, Note note) {
-            final String[] mCatsName ={"Edit", "Delete"};
-            AlertDialog.Builder builder =  new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Choose action");
-            builder.setItems(mCatsName, (dialog, item) -> {
-                if (item==1){
-                    RealmDB.deleteItem(note);
-                    adapter.updateData(RealmDB.getAllNotes());
-                    adapter.notifyDataSetChanged();
-                } else {
-                    Intent edit = new Intent(getApplicationContext(), EditAddActivity.class);
-                    edit.putExtra("isEdit", true);
-                    edit.putExtra("id", note.getId());
-                    startActivityForResult(edit, EditAddActivity.EDIT);
-                }
-            });
-            builder.create();
-            builder.show();
-        }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

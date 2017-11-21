@@ -11,10 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 import bsh.EvalError;
 import bsh.Interpreter;
+import dima.rebenko.notebook.Helpers.CustomTextView;
 import dima.rebenko.notebook.R;
 
 
-public class CalclulatorFragment extends AppCompatActivity implements View.OnClickListener {
+public class CalclulatorFragment extends BaseActivity implements View.OnClickListener {
 
     Button one, two, three, four, five, six, seven, eight, nine, zero;
     Button multiply, divide, plus, minus;
@@ -58,7 +59,7 @@ public class CalclulatorFragment extends AppCompatActivity implements View.OnCli
         multiply.setOnClickListener(this);
         divide.setOnClickListener(this);
         equal.setOnClickListener(this);
-        result = (TextView)findViewById(R.id.calculation_result_view);
+        result = CustomTextView.setupTextView((TextView)findViewById(R.id.calculation_result_view));
         result.setOnClickListener(this);
     }
 

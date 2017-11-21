@@ -43,6 +43,7 @@ public class Note extends RealmObject {
         public static String DATE = "date";
         public static String CREATIONAL_TIME = "creationalTime";
         public static String PATH_TO_IMAGE = "pathToImage";
+        public static String ID = "ID";
     }
 
     public String getPathToImage() {
